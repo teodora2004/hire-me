@@ -1,77 +1,73 @@
-# Interested in working for Famly?
+# Attendance Application
 
-Give us a chance to see your beautiful code! 🤩
+This repository contains a small React application for managing and displaying children's attendance data. The application fetches data from a given API and displays it in a user-friendly format.
 
-## How to get started
-- Fork this repository
-- Create a small application in React (or another agreed upon framework)
-- Describe your design decisions and setup instructions in the README.md of the forked repository
+## Getting Started
 
-## The assignment
-You are tasked to build a simple application for a nursery to manage the attendance of children each day.
+### Prerequisites
 
-The application should be able to do 3 things:
-1. List children with some form of pagination/lazy-loading/infinite-scroll
-2. Checkin a child
-3. Checkout a child
+- Node.js (>= 14.x)
+- npm (>= 6.x) or yarn (>= 1.x)
 
-Don't worry about design or anything like that.
+### Installation
 
-If you have any questions feel free to reach out to the person who sent you the assignment ☺️
+1. **Fork the Repository:**
 
-## API Specification
+   - Click the "Fork" button at the top-right corner of this repository's GitHub page to create a copy under your GitHub account.
 
-You have received an access token in the email that contained the link to this page.
+2. **Clone the Forked Repository:**
 
-### Fetch some children from
+   ```bash
+   git clone https://github.com/your-username/attendance-application.git
+   cd attendance-application
+   ```
 
-The API does not support any limit or offset, so the pagination/lazy-loading/infinite-scroll will have to be done client-side only.
+   Replace `your-username` with your GitHub username.
 
-```
-GET https://app.famly.co/api/daycare/tablet/group
-Arguments: {
-	accessToken: <accessToken>,
-	groupId: '86413ecf-01a1-44da-ba73-1aeda212a196',
-	institutionId: 'dc4bd858-9e9c-4df7-9386-0d91e42280eb'
-}
-```
+3. **Install Dependencies:**
 
-Example in cURL:
+   Using npm:
 
-```bash
-curl "https://app.famly.co/api/daycare/tablet/group?accessToken=<accessToken>&groupId=86413ecf-01a1-44da-ba73-1aeda212a196&institutionId=dc4bd858-9e9c-4df7-9386-0d91e42280eb"
-```
+   ```bash
+   npm install
+   ```
 
-### Checkin child
-```
-POST https://app.famly.co/api/v2/children/<childId>/checkins
+### Running the Application
 
-Arguments: {
-	accessToken: <accessToken>
-	pickupTime: 16:00
-}
-```
+To run the application locally, use the following command:
 
-Example in cURL:
+Using npm:
 
 ```bash
-curl \
-  -d 'accessToken=<accessToken>&pickupTime=16:00' \
-  https://app.famly.co/api/v2/children/fcd683d0-bc31-468c-948f-1ca70b91439d/checkins
+npm start
 ```
 
-### Checkout child
-```
-POST https://app.famly.co/api/v2/children/<childId>/checkout
-Arguments: {
-	accessToken: <accessToken>
-}
-```
+This will start the development server and open the application in your default web browser.
 
-Example in cURL:
+### Usage
 
-```bash
-curl \
-  -d 'accessToken=<accessToken>' \
-  https://app.famly.co/api/v2/children/fcd683d0-bc31-468c-948f-1ca70b91439d/checkout
-```
+1. Ensure you have a valid `accessToken`, `groupId`, and `institutionId` to fetch the attendance data.
+2. The application will fetch and display the list of children along with their attendance status.
+
+REACT_APP_ACCESS_TOKEN=<access_token>
+REACT_APP_GROUP_ID=86413ecf-01a1-44da-ba73-1aeda212a196
+REACT_APP_INSTITUTION_ID=dc4bd858-9e9c-4df7-9386-0d91e42280eb
+
+## Design Decisions
+
+### Custom Hook for Data Fetching
+
+I created a custom hook `useFetchChildren` to handle data fetching in order to promote code reusability, separation of concerns, and improved readability. By encapsulating the data fetching logic in a custom hook, we can easily reuse this logic across different components and maintain a clean component structure.
+
+### Error Handling
+
+The custom hook handles errors by setting an error state if the data fetching fails. This allows the component to gracefully handle and display error messages to the user.
+
+### Component Structure
+
+The application consists of the following main parts:
+
+- **`useFetchChildren` Hook:** Handles data fetching and state management.
+- **`ChildrenList` Component:** Uses the `useFetchChildren` hook to fetch and display the list of children.
+- **`Child` Component:** Handles check-in/out actions; By encapsulating this logic within the Child component, we promote encapsulation, reusability, and flexibility.
+- **`Pagination` feature - it is encapsulated within the usePagination custom hook. It tracks the current page state and calculates the range of items to display based on the current page number and items per page. It's utilizing memoization for performance optimization, it computes the current items and total pages, ensuring minimal re-renders.
