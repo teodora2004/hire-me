@@ -7,9 +7,6 @@ import moment from 'moment';
 import useFetchChildren from './hooks/useFetchChildren';
 
 function App() {
-  // const [children, setChildren] = useState<ChildData[]>([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState<string | null>(null);
   const accessToken = process.env.REACT_APP_ACCESS_TOKEN || '';
   const groupId = process.env.REACT_APP_GROUP_ID || '';
   const institutionId = process.env.REACT_APP_INSTITUTION_ID || '';

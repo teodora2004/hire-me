@@ -10,7 +10,7 @@ const usePagination = <T,>(items: T[], itemsPerPage: number) => {
 
   // memoize the computed values for items 
   // decided for useMemo because it's a good practice for optimization in case of large datasets
-  // since it only recomputes if the depedency changes
+  // since it only recomputes if the dependency changes
   const currentItems = useMemo(() => {
     if (!items) {
       return [];
