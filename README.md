@@ -49,9 +49,11 @@ This will start the development server and open the application in your default 
 1. Ensure you have a valid `accessToken`, `groupId`, and `institutionId` to fetch the attendance data.
 2. The application will fetch and display the list of children along with their attendance status.
 
+```bash
 REACT_APP_ACCESS_TOKEN=<access_token>
 REACT_APP_GROUP_ID=86413ecf-01a1-44da-ba73-1aeda212a196
 REACT_APP_INSTITUTION_ID=dc4bd858-9e9c-4df7-9386-0d91e42280eb
+```
 
 ## Design Decisions
 
